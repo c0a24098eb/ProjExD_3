@@ -141,6 +141,10 @@ class Bomb:
         screen.blit(self.img, self.rct)
 
 class Score:
+    """
+    イニシャライザではフォントと文字色、文字サイズ、
+    表示位置の設定を行い、updateメソッドでSurfaceを作成しblit
+    """
     def __init__(self, score):
         self.fonto = pg.font.SysFont("hgp創英角ﾎﾟｯﾌﾟ体", 30)
         self.img = self.fonto.render("スコア：" + str(score), True, (0, 0, 255))
@@ -153,7 +157,7 @@ class Score:
 
 
 def main():
-    COUNTER = 0
+    COUNTER = 0 #スコアを格納する変数
     pg.display.set_caption("たたかえ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))    
     bg_img = pg.image.load("fig/pg_bg.jpg")
@@ -195,6 +199,7 @@ def main():
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen) 
+        #Scoreクラスのインスタンスを作成し、updateメソッドでblit
         score = Score(COUNTER)
         score.update(screen)
         if beam is not None:
